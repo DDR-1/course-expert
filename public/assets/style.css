@@ -1,0 +1,561 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap%27");
+
+:root {
+  --admin-header-height: 70px;
+  --admin-footer-height: 70px;
+  --admin-nav-width: 250px;
+  --spacing: 2em;
+  --spacing-xs: 1em;
+  --spacing-xxs: 0.5em;
+  --spacing-xxxs: 0.3em;
+  --spacing-xxxxs: 0.1em;
+  --dashboard-column-count: 2;
+  /* Colors */
+  --primary: #000;
+  --primary-light: #e2e4f8;
+  --gray: #444db3;
+  --gray-lighter: rgb(4, 27, 97);
+  --gray-lightest: #f1f1f8;
+  --text: #1d256f;
+  --light-orange: #ffefe8;
+  --star: #ffaf17;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: -webkit-linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+input {
+  font-family: "Poppins", sans-serif;
+  background: transparent;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--gray);
+}
+
+span a {
+  color: black;
+}
+
+.admin {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: var(--admin-header-height);
+  grid-template-columns: var(--admin-nav-width) 1fr;
+  grid-template-areas: "header header" "nav main";
+  flex-wrap: wrap;
+}
+
+.admin__header {
+  grid-area: header;
+  background-color: #fff;
+  box-shadow: 0 2px 8px -2px var(--gray-lighter);
+  display: grid;
+  grid: auto / var(--admin-nav-width) 1fr;
+  grid-template-areas: "logo navContainer";
+  z-index: 1;
+  background: -webkit-linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+.title {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  align-items: center;
+  padding: var(--spacing-xs);
+  gap: var(--spacing-xs);
+  font-weight: 600;
+  font-size: 1.3em;
+}
+
+.navContainer {
+  display: grid;
+  grid-template-areas: "search link link link link userContainer";
+  grid: auto / 1fr min-content min-content min-content min-content 1fr;
+  align-content: center;
+  align-items: center;
+}
+
+.search {
+  color: var(--gray);
+  font-size: 1.25rem;
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  gap: var(--spacing-xxs);
+  padding: var(--spacing-xs);
+  align-items: center;
+  width: 100%;
+}
+
+.search button {
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  width: 100%;
+}
+
+::placeholder {
+  color: var(--gray);
+}
+
+.navContainer .link {
+  color: var(--gray);
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 3px solid transparent;
+  padding: 1.2em;
+}
+
+.link.active {
+  color: var(--primary);
+}
+
+.navContainer .link.active {
+  border-bottom: 3px solid var(--primary);
+  color: var(--primary);
+}
+
+.userContainer {
+  justify-content: end;
+  display: grid;
+  grid-template-areas: "notifications user";
+  padding: var(--spacing-xs);
+  gap: var(--spacing);
+  align-items: center;
+}
+
+.notifications {
+  color: var(--gray);
+  font-size: 1.25rem;
+  display: flex;
+}
+
+.notifications i::after {
+  --size: 0.45em;
+  content: "";
+  background-color: var(--primary);
+  width: var(--size);
+  height: var(--size);
+  border-radius: var(--size);
+  position: absolute;
+  margin-left: calc(-1 * var(--size));
+}
+
+.userContainer .user {
+  display: grid;
+  grid-template-areas: "img name caret";
+  gap: var(--spacing-xs);
+  align-items: center;
+}
+
+.user .img {
+  --size: 2.5em;
+  width: var(--size);
+  height: var(--size);
+  border-radius: var(--size);
+  background-image: url("https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png");
+  background-size: cover;
+  border: 0.05em solid #fff;
+  box-shadow: 0 0 0 0.1em var(--gray-lighter);
+}
+
+.user .name {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.userContainer .user .caret {
+  font-size: 1rem;
+  color: var(--gray);
+}
+
+.blog-container {
+  display: flex;
+  width: 100%;
+  min-height: 10vh;
+  align-items: center;
+  flex-direction: column;
+  padding: 12px;
+}
+
+.blog-container a {
+  color: black;
+  text-decoration: none;
+}
+
+.blog-container img {
+  width: 100%;
+  object-fit: contain;
+}
+.blog-container .card {
+  display: flex;
+  height: 15em;
+  width: 80%;
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.blog-container .leftcolumn {
+  display: flex;
+  width: 50%;
+  float: left;
+}
+
+.blog-container .rightcolumn {
+  width: 50%;
+  float: right;
+}
+
+.blog-container .row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.blog-container button {
+  padding: 15px 40px;
+  margin-top: 20px;
+  border: 0;
+  outline: none;
+  border-radius: 25px;
+  background: #333;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.blog-container .pagenav {
+  padding: 10px 30px;
+  margin-left: auto;
+}
+
+.results-container {
+  display: flex;
+  width: 100%;
+  min-height: 10vh;
+  align-content: center;
+}
+
+.results-container .filters {
+  width: 15%;
+  background: #fff;
+  float: flex;
+  padding: 2em;
+  margin: 2em;
+  margin-right: 1em;
+  border-radius: 20px;
+}
+
+.results-container .courses {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-gap: 1em;
+  padding: 0.7em;
+  margin-top: 2em;
+}
+
+.results-container .card {
+  display: flex;
+  flex-direction: column;
+  width: 22em;
+  height: 18em;
+  border-radius: 20px;
+  background: #fff;
+  padding: 1em;
+}
+
+.results-container .details {
+  display: flex;
+  width: 100%;
+  height: 80%;
+}
+
+.results-container .buttons {
+  display: flex;
+  height: 20%;
+  width: 100%;
+  align-content: center;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+.results-container .leftcolumn {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  float: left;
+  justify-content: space-evenly;
+}
+
+.results-container .rightcolumn {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  width: 30%;
+  float: right;
+  justify-content: space-evenly;
+}
+
+.results-container .platform,
+.results-container .level,
+.results-container .pace,
+.results-container .org {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.results-container .platform span,
+.results-container .level span,
+.results-container .pace span,
+.results-container .org span {
+  padding-left: 1em;
+}
+
+.results-container .course-link {
+  background-color: #2503e4;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: white;
+  padding: 15px;
+}
+
+.results-container .add-to-list {
+  background-color: #2662a7;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: white;
+  padding: 15px;
+}
+
+.results-container .remove-from-list {
+  background-color: #2662a7;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: white;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.results-container #title {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.results-container #price {
+  font-weight: 900;
+  color: #4c00ff;
+}
+
+.results-container .checked {
+  color: orange;
+}
+
+.wishlist-courses {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-gap: 1em;
+  padding: 0.7em;
+  margin-top: 2em;
+  padding: 2em;
+}
+
+.wishlist-courses .card {
+  display: flex;
+  flex-direction: column;
+  width: 22em;
+  height: 18em;
+  border-radius: 20px;
+  background: #fff;
+  padding: 1em;
+}
+
+.wishlist-courses .details {
+  display: flex;
+  width: 100%;
+  height: 80%;
+}
+
+.wishlist-courses .buttons {
+  display: flex;
+  height: 20%;
+  width: 100%;
+  align-content: center;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+.wishlist-courses .leftcolumn {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  float: left;
+  justify-content: space-evenly;
+}
+
+.wishlist-courses .rightcolumn {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  width: 30%;
+  float: right;
+  justify-content: space-evenly;
+}
+
+.wishlist-courses .platform,
+.wishlist-courses .level,
+.wishlist-courses .pace,
+.wishlist-courses .org {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.wishlist-courses .platform span,
+.wishlist-courses .level span,
+.wishlist-courses .pace span,
+.wishlist-courses .org span {
+  padding-left: 1em;
+}
+
+.wishlist-courses .course-link {
+  background-color: #2503e4;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: white;
+  padding: 15px;
+}
+
+.wishlist-courses .add-to-list {
+  background-color: #2662a7;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: white;
+  padding: 15px;
+}
+
+.wishlist-courses #title {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.wishlist-courses #price {
+  font-weight: 900;
+  color: #4c00ff;
+}
+
+.wishlist-courses .checked {
+  color: orange;
+}
+.support {
+  margin: 0;
+  line-height: 1.5;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+}
+.support-container {
+  width: 35%;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0px 2.2px rgba(0, 0, 0, 0.028), 0 0px 5.3px rgba(0, 0, 0, 0.04),
+    0 0px 10px rgba(0, 0, 0, 0.05), 0 0px 17.9px rgba(0, 0, 0, 0.06),
+    0 0px 33.4px rgba(0, 0, 0, 0.072), 0 0px 80px rgba(0, 0, 0, 0.1);
+}
+.support-container h2 {
+  background: -webkit-linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  letter-spacing: 0.1rem;
+  padding: 1rem;
+  cursor: default;
+  border-radius: 5px;
+}
+
+.support-container .form-group label {
+  display: block;
+  margin: 2rem 0 0.5rem 0;
+}
+.support-container .form-group input[type="text"],
+.support-container .form-group input[type="email"],
+.support-container .form-group textarea {
+  width: 100%;
+  padding: 1rem 0.8rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  outline: 0;
+  transition: border 0.15s;
+}
+.support-container .form-group input[type="text"],
+.support-container .form-group input[type="email"] {
+  height: 3rem;
+}
+.support-container .form-group textarea {
+  resize: vertical;
+}
+.support-container .submit {
+  font-weight: bold;
+  margin-top: 1rem;
+  padding: 1rem 1.5rem;
+  border: none;
+  background: -webkit-linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  cursor: pointer;
+  transition: background 0.15s;
+  border-radius: 5px;
+}
+.support-container i {
+  margin-right: 0.5rem;
+}
+
+.support-container .form-group input[type="text"]:focus,
+.support-container .form-group input[type="email"]:focus,
+.support-container .form-group textarea:focus {
+  border: 1px solid #222;
+}
