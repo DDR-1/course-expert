@@ -14,11 +14,11 @@
   --primary: #000;
   --primary-light: #e2e4f8;
   --gray: #444db3;
-  --gray-lighter: rgb(4, 27, 97);
+  --gray-lighter: #006ac7;
   --gray-lightest: #f1f1f8;
-  --text: #1d256f;
-  --light-orange: #ffefe8;
-  --star: #ffaf17;
+  --text: #000000;
+  --light-orange: #0091b9;
+  --star: #00a0a2;
 }
 
 *,
@@ -273,13 +273,26 @@ span a {
 }
 
 .results-container .filters {
+  position: sticky;
+  top: 2%;
   width: 15%;
-  background: #fff;
-  float: flex;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
   padding: 2em;
-  margin: 2em;
-  margin-right: 1em;
+  margin: 1em 2em;
   border-radius: 20px;
+}
+
+.results-container .filters p {
+  margin-top: 20px;
+}
+
+.results-container .filters label {
+  font-size: 0.9rem;
+}
+
+.results-container .filters p:first-of-type {
+  margin-top: 0px;
 }
 
 .results-container .courses {
@@ -558,4 +571,38 @@ span a {
 .support-container .form-group input[type="email"]:focus,
 .support-container .form-group textarea:focus {
   border: 1px solid #222;
+}
+
+#filter-button {
+  background-color: var(--gray-lighter);
+  border: none;
+  border-radius: 10px;
+  margin: 20px 0 0 45px;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: white;
+  padding: 10px;
+}
+
+#search {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+#search::placeholder {
+  font-size: 1rem;
+  padding: 8px;
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+#search-btn {
+  background-color: transparent;
+  padding: 0;
+  width: 50px;
+}
+
+#logout-btn {
+  background-color: transparent;
+  border: none;
 }

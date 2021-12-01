@@ -70,7 +70,7 @@
               id="advanced"
             />
             Advanced</label
-          ><br />
+          ><br /><br />
           <p><strong>Pricing</strong></p>
           <label
             ><input type="checkbox" name="price" value="FREE" id="free" />
@@ -117,7 +117,7 @@
             ><input
               type="checkbox"
               name="university"
-              value="google"
+              value="Google"
               id="google"
             />
             Google</label
@@ -135,16 +135,16 @@
             ><input
               type="checkbox"
               name="university"
-              value="University of Michigan"
-              id="uom"
+              value="AWS"
+              id="aws"
             />
-            University of Michigan</label
+            AWS</label
           ><br />
           <label
             ><input type="checkbox" name="university" value="IBM" id="ibm" />
             IBM</label
           ><br />
-          <button type="submit">Filter</button>
+          <button id="filter-button" type="submit"> <i class="fas fa-filter"></i> Filter</button>
         </form>
       </div>
       <div class="courses">
@@ -154,7 +154,11 @@
             <div class="leftcolumn">
               <span id="title"><%=course.name%></span>
               <% switch(course.platform){ case "Coursera":link =
-              "https://cdn.iconscout.com/icon/free/png-256/coursera-3521364-2944808.png";
+              "https://cdn.iconscout.com/icon/free/png-256/coursera-3521364-2944808.png"; 
+              break;case "Udemy":link =
+              "https://appforwin10.com/file/2018/12/Udemy-Online-Courses-Free-Download-for-Windows-10.png"; 
+              break;case "Datacamp":link =
+              "https://assets.foleon.com/eu-west-2/uploads-7e3kk3/40444/logo-green-dc.0612e4e7cc00.png"; 
               break; case "Udacity":link =
               "https://cdn.worldvectorlogo.com/logos/udacity.svg"; break; } %>
               <div class="platform" id="platform">
@@ -215,138 +219,6 @@
           </div>
         </div>
         <% } %>
-
-        <!-- <div class="card">
-          <div class="details">
-            <div class="leftcolumn">
-              <span id="title">
-                Machine Learning Engineer for Microsoft Azure
-              </span>
-              <div class="platform" id="platform">
-                <img
-                  src="https://cdn.worldvectorlogo.com/logos/udacity.svg"
-                  height="24em"
-                  width="24em"
-                />
-                <span>Udacity</span>
-              </div>
-              <div class="org" id="org">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/OOjs_UI_icon_university.svg/768px-OOjs_UI_icon_university.svg.png"
-                  height="24em"
-                  width="24em"
-                />
-                <span>Microsoft</span>
-              </div>
-              <div class="level" id="level">
-                <img
-                  src="https://icon-library.com/images/nature_icon-10-2-512.png"
-                  width="24em"
-                  height="24em"
-                />
-                <span>Intermediate</span>
-              </div>
-              <div class="pace" id="pace">
-                <img
-                  src="https://www.clipartmax.com/png/small/21-211772_electricity-clipart-electric-grid-free-calendar-icon-png.png"
-                  width="21em"
-                  height="21em"
-                />
-                <span>Self Paced</span>
-              </div>
-            </div>
-            <div class="rightcolumn">
-              <span id="price"> PAID </span>
-              <div class="rating">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-              </div>
-            </div>
-          </div>
-          <div class="buttons">
-            <div class="course-btn">
-              <a
-                href="https://www.udacity.com/course/machine-learning-engineer-for-microsoft-azure-nanodegree--nd00333"
-                target="_blank"
-              >
-                <button class="course-link">GO TO COURSE</button>
-              </a>
-            </div>
-            <div class="add-btn">
-              <button class="add-to-list">
-                <i class="fa fa-plus"></i> Add to Wishlist
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="details">
-            <div class="leftcolumn">
-              <span id="title"> Getting Started with AI using IBM Watson </span>
-              <div class="platform" id="platform">
-                <img
-                  src="https://cdn.iconscout.com/icon/free/png-256/coursera-3521364-2944808.png"
-                  height="24em"
-                  width="24em"
-                />
-                <span>Coursera</span>
-              </div>
-              <div class="org" id="org">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/OOjs_UI_icon_university.svg/768px-OOjs_UI_icon_university.svg.png"
-                  height="24em"
-                  width="24em"
-                />
-                <span>IBM</span>
-              </div>
-              <div class="level" id="level">
-                <img
-                  src="https://icon-library.com/images/nature_icon-10-2-512.png"
-                  width="24em"
-                  height="24em"
-                />
-                <span>Beginner</span>
-              </div>
-              <div class="pace" id="pace">
-                <img
-                  src="https://www.clipartmax.com/png/small/21-211772_electricity-clipart-electric-grid-free-calendar-icon-png.png"
-                  width="21em"
-                  height="21em"
-                />
-                <span>Self Paced</span>
-              </div>
-            </div>
-            <div class="rightcolumn">
-              <span id="price"> PAID </span>
-              <div class="rating">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-              </div>
-            </div>
-          </div>
-          <div class="buttons">
-            <div class="course-btn">
-              <a
-                href="https://www.coursera.org/learn/ai-with-ibm-watson?specialization=applied-artifical-intelligence-ibm-watson-ai"
-                target="_blank"
-              >
-                <button class="course-link">GO TO COURSE</button>
-              </a>
-            </div>
-            <div class="add-btn">
-              <button class="add-to-list">
-                <i class="fa fa-plus"></i> Add to Wishlist
-              </button>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </body>

@@ -136,7 +136,7 @@ app.get(
       query = { name: { $regex: search, $options: "i" } };
       req.session.searchbool = false;
     }
-    const courses = await Courses.find(query).limit(9);
+    const courses = await Courses.find(query);
     req.session.query = {};
     req.session.search = {};
     res.render("index", { courses, username });
