@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - CourseExpert</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.7/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+      integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../public/assets/style.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        $(".alert").alert();
+      });
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body>
+    <%- include("../views/header.ejs") %>
+    <%- include("../views/flash.ejs") %>
+    <div class="results-container">
+      <div class="filters">
+        <p><strong>Level</strong></p>
+        <form action="/filter" id="level-filter" method="POST">
+          <label
+            ><input
+              type="checkbox"
+              name="level"
+              value="Beginner"
+              id="beginner"
+            />
+            Beginner</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="level"
+              value="Intermediate"
+              id="intermediate"
+            />
+            Intermediate</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="level"
+              value="Advanced"
+              id="advanced"
+            />
+            Advanced</label
+          ><br />
+          <p><strong>Pricing</strong></p>
+          <label
+            ><input type="checkbox" name="price" value="FREE" id="free" />
+            Free</label
+          ><br />
+          <label
+            ><input type="checkbox" name="price" value="PAID" id="paid" />
+            Paid</label
+          ><br />
+          <p><strong>Platform</strong></p>
+          <label
+            ><input
+              type="checkbox"
+              name="platform"
+              value="Coursera"
+              id="coursera"
+            />
+            Coursera</label
+          ><br />
+          <label
+            ><input type="checkbox" name="platform" value="Udemy" id="udemy" />
+            Udemy</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="platform"
+              value="Udacity"
+              id="udacity"
+            />
+            Udacity</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="platform"
+              value="Datacamp"
+              id="datacamp"
+            />
+            Datacamp</label
+          ><br />
+          <p><strong>Organization</strong></p>
+          <label
+            ><input
+              type="checkbox"
+              name="university"
+              value="google"
+              id="google"
+            />
+            Google</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="university"
+              value="Microsoft"
+              id="aws"
+            />
+            Microsoft</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="university"
+              value="University of Michigan"
+              id="uom"
+            />
+            University of Michigan</label
+          ><br />
+          <label
+            ><input type="checkbox" name="university" value="IBM" id="ibm" />
+            IBM</label
+          ><br />
+          <button type="submit">Filter</button>
+        </form>
+      </div>
+      <div class="courses">
+        <% for (let course of courses ) { %>
+        <div class="card">
+          <div class="details">
+            <div class="leftcolumn">
+              <span id="title"><%=course.name%></span>
+              <% switch(course.platform){ case "Coursera":link =
+              "https://cdn.iconscout.com/icon/free/png-256/coursera-3521364-2944808.png";
+              break; case "Udacity":link =
+              "https://cdn.worldvectorlogo.com/logos/udacity.svg"; break; } %>
+              <div class="platform" id="platform">
+                <img src="<%=link%>" height="24em" width="24em" />
+                <span><%=course.platform%></span>
+              </div>
+              <div class="org" id="org">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/OOjs_UI_icon_university.svg/768px-OOjs_UI_icon_university.svg.png"
+                  height="24em"
+                  width="24em"
+                />
+                <span><%=course.university%></span>
+              </div>
+              <div class="level" id="level">
+                <img
+                  src="https://icon-library.com/images/nature_icon-10-2-512.png"
+                  width="24em"
+                  height="24em"
+                />
+                <span><%=course.level%></span>
+              </div>
+              <div class="pace" id="pace">
+                <img
+                  src="https://www.clipartmax.com/png/small/21-211772_electricity-clipart-electric-grid-free-calendar-icon-png.png"
+                  width="21em"
+                  height="21em"
+                />
+                <span><%=course.pace%></span>
+              </div>
+            </div>
+            <div class="rightcolumn">
+              <span id="price"> <%=course.price%> </span>
+              <div class="rating">
+                <% for (let i = 0; i< course.rating; i++) {%>
+                <span class="fa fa-star checked"></span>
+                <% } %> <% for (let i = course.rating; i<5; i++) {%>
+                <span class="fa fa-star"></span>
+                <% } %>
+              </div>
+            </div>
+          </div>
+          <div class="buttons">
+            <div class="course-btn">
+              <a href="<%=course.link%>" target="_blank">
+                <button class="course-link">GO TO COURSE</button>
+              </a>
+            </div>
+            <div class="add-btn">
+              <form action="/wishlistadd" method="POST">
+              <input value="<%=course.name%>" type = "hidden" name ="coursename">
+              <button class="add-to-list" type = "submit">
+                <i class="fa fa-plus"></i> Add to Wishlist
+              </button>
+            </form>
+            </form>
+            </div>
+          </div>
+        </div>
+        <% } %>
+
+        <!-- <div class="card">
+          <div class="details">
+            <div class="leftcolumn">
+              <span id="title">
+                Machine Learning Engineer for Microsoft Azure
+              </span>
+              <div class="platform" id="platform">
+                <img
+                  src="https://cdn.worldvectorlogo.com/logos/udacity.svg"
+                  height="24em"
+                  width="24em"
+                />
+                <span>Udacity</span>
+              </div>
+              <div class="org" id="org">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/OOjs_UI_icon_university.svg/768px-OOjs_UI_icon_university.svg.png"
+                  height="24em"
+                  width="24em"
+                />
+                <span>Microsoft</span>
+              </div>
+              <div class="level" id="level">
+                <img
+                  src="https://icon-library.com/images/nature_icon-10-2-512.png"
+                  width="24em"
+                  height="24em"
+                />
+                <span>Intermediate</span>
+              </div>
+              <div class="pace" id="pace">
+                <img
+                  src="https://www.clipartmax.com/png/small/21-211772_electricity-clipart-electric-grid-free-calendar-icon-png.png"
+                  width="21em"
+                  height="21em"
+                />
+                <span>Self Paced</span>
+              </div>
+            </div>
+            <div class="rightcolumn">
+              <span id="price"> PAID </span>
+              <div class="rating">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+              </div>
+            </div>
+          </div>
+          <div class="buttons">
+            <div class="course-btn">
+              <a
+                href="https://www.udacity.com/course/machine-learning-engineer-for-microsoft-azure-nanodegree--nd00333"
+                target="_blank"
+              >
+                <button class="course-link">GO TO COURSE</button>
+              </a>
+            </div>
+            <div class="add-btn">
+              <button class="add-to-list">
+                <i class="fa fa-plus"></i> Add to Wishlist
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="details">
+            <div class="leftcolumn">
+              <span id="title"> Getting Started with AI using IBM Watson </span>
+              <div class="platform" id="platform">
+                <img
+                  src="https://cdn.iconscout.com/icon/free/png-256/coursera-3521364-2944808.png"
+                  height="24em"
+                  width="24em"
+                />
+                <span>Coursera</span>
+              </div>
+              <div class="org" id="org">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/OOjs_UI_icon_university.svg/768px-OOjs_UI_icon_university.svg.png"
+                  height="24em"
+                  width="24em"
+                />
+                <span>IBM</span>
+              </div>
+              <div class="level" id="level">
+                <img
+                  src="https://icon-library.com/images/nature_icon-10-2-512.png"
+                  width="24em"
+                  height="24em"
+                />
+                <span>Beginner</span>
+              </div>
+              <div class="pace" id="pace">
+                <img
+                  src="https://www.clipartmax.com/png/small/21-211772_electricity-clipart-electric-grid-free-calendar-icon-png.png"
+                  width="21em"
+                  height="21em"
+                />
+                <span>Self Paced</span>
+              </div>
+            </div>
+            <div class="rightcolumn">
+              <span id="price"> PAID </span>
+              <div class="rating">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+              </div>
+            </div>
+          </div>
+          <div class="buttons">
+            <div class="course-btn">
+              <a
+                href="https://www.coursera.org/learn/ai-with-ibm-watson?specialization=applied-artifical-intelligence-ibm-watson-ai"
+                target="_blank"
+              >
+                <button class="course-link">GO TO COURSE</button>
+              </a>
+            </div>
+            <div class="add-btn">
+              <button class="add-to-list">
+                <i class="fa fa-plus"></i> Add to Wishlist
+              </button>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </body>
+</html>

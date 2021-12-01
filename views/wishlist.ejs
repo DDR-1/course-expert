@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishlist - CourseExpert</title>
+    <link rel="stylesheet" href="../public/assets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.7/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body>
+    <%- include("../views/header.ejs") %>
+
+    <div class="results-container">
+      <div class="courses">
+        <% for (let course of courses ) { %>
+        <div class="card">
+          <div class="details">
+            <div class="leftcolumn">
+              <span id="title"><%=course.name%></span>
+              <% switch(course.platform){ case "Coursera":link =
+              "https://cdn.iconscout.com/icon/free/png-256/coursera-3521364-2944808.png";
+              break; case "Udacity":link =
+              "https://cdn.worldvectorlogo.com/logos/udacity.svg"; break; } %>
+              <div class="platform" id="platform">
+                <img src="<%=link%>" height="24em" width="24em" />
+                <span><%=course.platform%></span>
+              </div>
+              <div class="org" id="org">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/OOjs_UI_icon_university.svg/768px-OOjs_UI_icon_university.svg.png"
+                  height="24em"
+                  width="24em"
+                />
+                <span><%=course.university%></span>
+              </div>
+              <div class="level" id="level">
+                <img
+                  src="https://icon-library.com/images/nature_icon-10-2-512.png"
+                  width="24em"
+                  height="24em"
+                />
+                <span><%=course.level%></span>
+              </div>
+              <div class="pace" id="pace">
+                <img
+                  src="https://www.clipartmax.com/png/small/21-211772_electricity-clipart-electric-grid-free-calendar-icon-png.png"
+                  width="21em"
+                  height="21em"
+                />
+                <span><%=course.pace%></span>
+              </div>
+            </div>
+            <div class="rightcolumn">
+              <span id="price"> <%=course.price%> </span>
+              <div class="rating">
+                <% for (let i = 0; i< course.rating; i++) {%>
+                <span class="fa fa-star checked"></span>
+                <% } %> <% for (let i = course.rating; i<5; i++) {%>
+                <span class="fa fa-star"></span>
+                <% } %>
+              </div>
+            </div>
+          </div>
+          <div class="buttons">
+            <div class="course-btn">
+              <a href="<%=course.link%>" target="_blank">
+                <button class="course-link">GO TO COURSE</button>
+              </a>
+            </div>
+            <div class="add-btn">
+              <form action="/wishlistrm" method="POST">
+                <input value="<%=course.name%>" type = "hidden" name ="coursename">
+                <button class="remove-from-list" type = "submit">
+                  <i class="fa fa-minus"></i> Remove from Wishlist
+                </button>
+              </form>
+            </form>
+            </div>
+          </div>
+        </div>
+        <% } %>
+    </div>
+  </body>
+</html>
