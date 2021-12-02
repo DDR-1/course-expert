@@ -70,7 +70,7 @@ app.post("/register", async (req, res) => {
     const error = "Email format not proper";
     const pagename = "Signup";
     const page = "register";
-    req.flash("success", error);
+    req.flash("error", error);
     res.redirect("/register");
     return;
   }
@@ -78,7 +78,7 @@ app.post("/register", async (req, res) => {
     const error = "Sorry Password Length too short";
     const pagename = "Signup";
     const page = "register";
-    req.flash("success", error);
+    req.flash("error", error);
     res.redirect("/register");
     return;
   }
@@ -86,7 +86,7 @@ app.post("/register", async (req, res) => {
     const error = "Sorry Passwords do not match";
     const pagename = "Signup";
     const page = "register";
-    req.flash("success", error);
+    req.flash("error", error);
     res.redirect("/register");
     // res.render("error", { error, pagename, page });
     return;
