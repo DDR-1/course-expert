@@ -49,6 +49,20 @@ mongoose
 app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: "notagoodsecret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+const requireLogin = (req, res, next) => {
+  if (!req.session.user_id) {
+    return res.redirect("/login");
+  }
+  next();
+};
 
 app.set("views", path.join(__dirname, "views"));
 app.set("public", path.join(__dirname, "public"));
@@ -98,6 +112,7 @@ app.post("/register", async (req, res) => {
   await wish.save();
   const msg = "Successfully registered";
   req.flash("success", msg);
+  req.session.user_id = user._id;
   res.redirect("/login");
 });
 
@@ -111,6 +126,7 @@ app.post("/login", async (req, res) => {
   if (foundUser) {
     req.session.username = username;
     req.flash("success", "Login Successful. Welcome!");
+    req.session.user_id = foundUser._id;
     res.redirect("/index");
   } else {
     const error = "Uh Oh! Incorrect Username or Password";
@@ -121,8 +137,15 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.post("/logout", (req, res) => {
+  req.session.user_id = null;
+  req.session.destroy();
+  res.redirect("/login");
+});
+
 app.get(
   "/index",
+  requireLogin,
   catchAsync(async (req, res) => {
     username = req.session.username;
     req.flash("success");
@@ -155,7 +178,7 @@ app.post("/search", async (req, res) => {
   res.redirect("/index");
 });
 
-app.get("/wishlist", async (req, res) => {
+app.get("/wishlist", requireLogin, async (req, res) => {
   username = req.session.username;
 
   const user = await Wishlist.findOne({ name: username });
@@ -197,12 +220,12 @@ app.post(
   })
 );
 
-app.get("/blog", (req, res) => {
+app.get("/blog", requireLogin, (req, res) => {
   username = req.session.username;
   res.render("blog", { username });
 });
 
-app.get("/support", (req, res) => {
+app.get("/support", requireLogin, (req, res) => {
   username = req.session.username;
   res.render("support", { username });
 });
